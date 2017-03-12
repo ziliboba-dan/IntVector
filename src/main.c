@@ -12,6 +12,7 @@ void size_capacity(IntVector *v) {
 	printf("Size = %zu\n", int_vector_get_size(v));
 	printf("Capacity = %zu\n", int_vector_get_capacity(v));
 }
+
 int main(){
 
 	IntVector *v = int_vector_new(3);
@@ -79,9 +80,12 @@ int main(){
 	printv(v);
 
 	//int_vector_push_back
-	if (int_vector_push_back(v, 7) == 0) 
+	if (int_vector_push_back(v, 7) == 0) { 
 			printf("Элемент успешно добавлен\n");
-	else printf("Error\n");
+	}
+	else {
+		printf("Error\n");
+	}
 	printv(v);
 	size_capacity(v);
 	int_vector_free(v);
