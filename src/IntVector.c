@@ -99,10 +99,13 @@ void int_vector_pop_back(IntVector *v)
 }
 
 int int_vector_shrink_to_fit(IntVector *v)
-{
-	v->data = realloc(v->data, v->size * sizeof(int));
-	if (v->data == NULL) {
+{	
+	if (v->capacity > v->size) {
+		int *tmp = realloc(v->data, v->size * sizeof(int));
+		if (tmp == NULL) {
 			return -1;
+		}
+		v->data = tmp;
 	}
 	v->capacity = v->size;
 	return 0;
@@ -122,9 +125,7 @@ int int_vector_resize(IntVector *v, size_t new_size)
 		v->size = new_size;
 	}
 	return 0;
-
 }
-
 
 int int_vector_reserve(IntVector *v, size_t new_capacity)
 {
